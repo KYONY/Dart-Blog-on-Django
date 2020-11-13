@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+from django.urls import reverse
+
 """
 Categoty
 ========
@@ -17,10 +19,13 @@ title, slug, author, content, created_at, photo, views, category, tags
 
 class Category(models.Model):
 	title = models.CharField(max_length=255, verbose_name='Категория')
-	slug = models.SlugField(max_length=255,verbose_name='Url', unique=True)
+	slug = models.SlugField(max_length=255,verbose_name='Slug', unique=True)
 
 	def __str__(self):
 		return self.title
+
+	def get_absolute_url(self):
+		return reverse('category', kwargs={'slug':self.slug})
 
 	class Meta:
 		verbose_name='Категория'
@@ -29,7 +34,7 @@ class Category(models.Model):
 
 class Tags(models.Model):
 	title = models.CharField(max_length=50, verbose_name='Тег')
-	slug = models.SlugField(max_length=255,verbose_name='Url slug', unique=True)
+	slug = models.SlugField(max_length=255,verbose_name='Slug', unique=True)
 
 	def __str__(self):
 		return self.title
@@ -42,20 +47,20 @@ class Tags(models.Model):
 
 class Posts(models.Model):
 	title = models.CharField(max_length=255, verbose_name='Пост')
-	slug = models.SlugField(max_length=255, verbose_name='Url поста', unique=True)
+	slug = models.SlugField(max_length=255, verbose_name='Slug', unique=True)
 	author = models.CharField(max_length=100, verbose_name='Автор')
 	content = models.TextField(verbose_name='Контент', blank=True)
 	created_at = models.DateTimeField(auto_now=True, verbose_name='Опубликовано')
 	photo = models.ImageField(upload_to='photo/%Y/%m/%d/', blank=True, verbose_name='Фото')
 	views = models.IntegerField(default=0, verbose_name='Кол-во просмотров')
-	category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='posts')
+	category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='posts', verbose_name='Категория')
 	tags = models.ManyToManyField(Tags, blank=True, related_name='posts')
 
 	def __str__(self):
 		return self.title
 
 	class Meta:
-		verbose_name='Пост'
-		verbose_name_plural = 'Посты'
+		verbose_name='Статья(ю)'
+		verbose_name_plural = 'Статьи'
 		ordering = ['-created_at']
 
