@@ -1,24 +1,7 @@
 $(document).ready(function () {
-//    $('.my-slider').unslider({
-//        animation: 'vertical',
-//        autoplay: true,
-//        infinite: true
-//    });
-//
-//
-//    $('.our-client-carousal').owlCarousel({
-//        items: 1,
-//        loop: true,
-//        autoplay: true,
-//        autoplayTimeout: 5000,
-//        margin: 10,
-//        nav: true,
-//        navText: [
-//        "<i class=\"fa fa-angle-left\" aria-hidden=\"true\"></i>",
-//        "<i class=\"fa fa-angle-right\" aria-hidden=\"true\"></i>"],
-//    });
 
-    $('.menu a').each(function () {
+
+    $('.menu a').each(function(){
         let location = window.location.protocol + '//' + window.location.host + window.location.pathname;
         let link = this.href;
         if (location == link){
