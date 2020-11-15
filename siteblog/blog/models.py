@@ -59,8 +59,30 @@ class Posts(models.Model):
 	def __str__(self):
 		return self.title
 
+	def get_absolute_url(self):
+		return reverse('post', kwargs={'slug':self.slug})
+
 	class Meta:
 		verbose_name='Статья(ю)'
 		verbose_name_plural = 'Статьи'
 		ordering = ['-created_at']
+
+
+#TODO - создать таблицы для главного поста + для второго - внедрить в шаблон
+class MainPost(models.Model):
+	title = models.CharField(max_length=255, verbose_name='Заголовок')
+	content = models.TextField(verbose_name='Содержание', blank=True)
+	photo = models.ImageField(upload_to='photo/main_post/', blank=True, verbose_name='Фото')
+	created_at = models.DateTimeField(auto_now=True, verbose_name='Опубликовано')
+
+
+	def __str__(self):
+		return self.title
+
+	class Meta:
+		verbose_name='Главный пост'
+		verbose_name_plural = 'Главный пост'
+		ordering = ['-created_at']
+
+
 
