@@ -1,0 +1,13 @@
+<div class="tags">
+    <h2 class="sidebar-title">Tags</h2>
+    {% if tags.exists %}
+        {% for tag in tags %}
+            <p><a href="{{ tag.get_absolute_url }}">{{ tag.title|upper }}</a></p>
+        {% endfor %}
+    {% endif %}
+</div>
+
+
+
+
+

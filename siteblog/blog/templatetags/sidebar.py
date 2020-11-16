@@ -14,3 +14,9 @@ def get_popular_posts(count=3):
 def get_tags():
 	tags = Tags.objects.all()
 	return {'tags': tags}
+
+
+# @register.inclusion_tag('blog/search_tpl.html')
+# def search():
+# 	tags = Tags.objects.all()
+# 	return {'tags': tags}
