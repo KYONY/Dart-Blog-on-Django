@@ -20,10 +20,10 @@ class PostsAdmin(admin.ModelAdmin):
 	form = PostAdminForm
 	save_as = True
 	save_on_top = True
-	list_display = ('id', 'title', 'slug', 'category', 'created_at', 'get_photo')
+	list_display = ('id', 'title', 'slug', 'category', 'created_at', 'get_photo','views')
 	list_display_links = ('id','title')
 	search_fields = ('title',)
-	list_filter = ('category', 'tags')
+	list_filter = ('category', 'tags', 'views')
 	readonly_fields = ('views','created_at', 'get_photo')
 	fields = ('title', 'slug', 'category', 'tags', 'content','photo','get_photo','views', 'created_at')
 
